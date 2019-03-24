@@ -126,7 +126,7 @@ namespace NET.S._2019.Dremliug._02
 
         #region FilterDigit
 
-        /// <summary> Takes a list of integers and filters the list so that only numbers containing the specified digit are left at the output. </summary>
+        /// <summary> Takes a list of integers and filters the list so that only numbers containing the specified digit are left. </summary>
         /// <param name="list"> A list of integers. </param>
         /// <param name="digit"> A digit to search for. </param>
         public static void FilterDigit(ref List<int> list, int digit)
