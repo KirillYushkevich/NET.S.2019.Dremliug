@@ -152,28 +152,28 @@ namespace NET.S._2019.Dremliug._02
             #endregion
 
             var filteredList = new List<int>(list.Count);
-            var uniqueElements = new HashSet<int>(list.Count);
+            var alreadySeenElements = new HashSet<int>(list.Count);
             int currentElement;
 
-            // Check every digit of each number.
             foreach (var v in list)
             {
-                if (uniqueElements.Contains(v))
+                // If the current value has not been processed before.
+                if (!alreadySeenElements.Contains(v))
                 {
-                    continue;
-                }
-
-                currentElement = Math.Abs(v);
-                do
-                {
-                    if (currentElement % 10 == digit)
+                    alreadySeenElements.Add(v);
+                    currentElement = Math.Abs(v);
+                    // Check every digit of each number.
+                    do
                     {
-                        filteredList.Add(v);
-                        uniqueElements.Add(v);
-                        break;
-                    }
-                    currentElement /= 10;
-                } while (currentElement > 0);
+                        if (currentElement % 10 == digit)
+                        {
+                            filteredList.Add(v);
+                            alreadySeenElements.Add(v);
+                            break;
+                        }
+                        currentElement /= 10;
+                    } while (currentElement > 0);
+                }
             }
 
             // Set reference to the filtered list.
