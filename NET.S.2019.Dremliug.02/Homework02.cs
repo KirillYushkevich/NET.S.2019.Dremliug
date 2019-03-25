@@ -58,11 +58,12 @@ namespace NET.S._2019.Dremliug._02
             // Split the number to digits in the original order and store in a list. Lower positions of the digits have smaller indexes.
             var digits = new List<int>(10);
             int numberRemains = number;
-            for (int i = 0; numberRemains > 0; i++)
+
+            do
             {
                 digits.Add(numberRemains % 10);
                 numberRemains /= 10;
-            }
+            } while (numberRemains > 0);
 
             // Search for a position that has a higher digit value than the digit in previous position.
             int index;
@@ -80,7 +81,7 @@ namespace NET.S._2019.Dremliug._02
             // Swap the digit at [index] with the digit at [index - 1].
             (digits[index], digits[index - 1]) = (digits[index - 1], digits[index]);
 
-            // Sort digits by values at [0, index] range in descending order to make the new number as small as possible.
+            // Sort digits by value at [0, index] range in descending order to make the new number as small as possible.
             digits.Sort(0, index, Comparer<int>.Create((a, b) => b.CompareTo(a)));
 
             // Build the new number.
@@ -93,7 +94,7 @@ namespace NET.S._2019.Dremliug._02
                 }
                 catch (OverflowException)
                 {
-                    // If overflow happens then int number does not exist.
+                    // If overflow happens then Int32 number does not exist.
                     return -1;
                 }
             }

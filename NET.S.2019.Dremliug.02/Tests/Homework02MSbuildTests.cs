@@ -4,12 +4,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace NET.S._2019.Dremliug._02.Tests
 {
-    [TestClass()]
+    [TestClass]
     public class Homework02MSbuildTests
     {
         #region InsertNumber
 
-        [TestMethod()]
+        [TestMethod]
         [DataRow(15, 15, 0, 0, 15)]
         [DataRow(8, 15, 0, 0, 9)]
         [DataRow(8, 15, 3, 8, 120)]
@@ -17,7 +17,7 @@ namespace NET.S._2019.Dremliug._02.Tests
         public void InsertNumberTest(int target, int source, int startOfBitRange, int endOfBitRange, int expected)
             => Assert.AreEqual(expected, Homework02.InsertNumber(target, source, startOfBitRange, endOfBitRange));
 
-        [TestMethod()]
+        [TestMethod]
         [DataRow(8, 15, 8, 3)]
         [DataRow(8, 15, -1, 8)]
         [DataRow(8, 15, 3, 32)]

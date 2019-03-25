@@ -23,7 +23,6 @@ namespace NET.S._2019.Dremliug._02.Tests
         [TestCase(8, 15, 8, 3)]
         [TestCase(8, 15, -1, 8)]
         [TestCase(8, 15, 3, 32)]
-        [TestCase(8, 15, 8, 3)]
         public void InsertNumberTests_WrongBitPositions_ThrowsArgumentOutOfRangeException(int target, int source, int startOfBitRange, int endOfBitRange)
             => Assert.Throws<ArgumentOutOfRangeException>(() => Homework02.InsertNumber(target, source, startOfBitRange, endOfBitRange));
 
@@ -124,7 +123,6 @@ namespace NET.S._2019.Dremliug._02.Tests
         [TestCase(0.001, 3, 0.0001, ExpectedResult = 0.1)]
         [TestCase(-0.001, 3, 0.0001, ExpectedResult = -0.1)]
         [TestCase(0.04100625, 4, 0.0001, ExpectedResult = 0.45)]
-        [TestCase(8, 3, 0.0001, ExpectedResult = 2)]
         [TestCase(0.0279936, 7, 0.0001, ExpectedResult = 0.6)]
         [TestCase(-0.0279936, 7, 0.0001, ExpectedResult = -0.6)]
         [TestCase(0.0081, 4, 0.1, ExpectedResult = 0.3)]
