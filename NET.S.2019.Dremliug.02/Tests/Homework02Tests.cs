@@ -55,7 +55,7 @@ namespace NET.S._2019.Dremliug._02.Tests
         // How to find out if the return time value is correct or not?
         [TestCase(3456432)]
         public void TimeElapsedTests(int number)
-            => Assert.IsInstanceOf<string>(Homework02.TimeElapsed(number));
+            => Assert.IsInstanceOf<TimeSpan>(Homework02.TimeElapsedFindNextBiggerNumber(number));
 
         #endregion
 

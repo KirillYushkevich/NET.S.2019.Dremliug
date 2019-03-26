@@ -110,8 +110,8 @@ namespace NET.S._2019.Dremliug._02
         /// Displays an execution time of FindNextBiggerNumber method.
         /// </summary>
         /// <param name="number"> A number for FindNextBiggerNumber() method. </param>
-        /// <returns> Elapsed time as a string. </returns>
-        public static string TimeElapsed(int number)
+        /// <returns> Elapsed time as a TimeSpan value. </returns>
+        public static TimeSpan TimeElapsedFindNextBiggerNumber(int number)
         {
             // Warm-up is required.
             FindNextBiggerNumber(number);
@@ -120,7 +120,7 @@ namespace NET.S._2019.Dremliug._02
             FindNextBiggerNumber(number);
             watch.Stop();
 
-            return watch.Elapsed.ToString();
+            return watch.Elapsed;
         }
 
         #endregion
