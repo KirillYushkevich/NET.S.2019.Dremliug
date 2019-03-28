@@ -26,10 +26,10 @@ namespace NET.S._2019.Dremliug._02
             }
 
             // Create a bit mask of the required length.
-            var mask = (1 << (endOfBitRange - startOfBitRange + 1)) - 1;
+            int mask = ~(-1 << (endOfBitRange - startOfBitRange + 1));
 
             // Take the required amount of bits from the source number.
-            var takenBitField = source & mask;
+            int takenBitField = source & mask;
 
             // Replace bits in the target number and return the result.
             return (target & ~(mask << startOfBitRange)) | (takenBitField << startOfBitRange);
