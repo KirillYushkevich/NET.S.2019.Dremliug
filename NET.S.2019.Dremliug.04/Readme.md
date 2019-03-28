@@ -1,4 +1,4 @@
-1.
+1. Greatest common divisor:
   - Create a class that allows you to perform GCD calculations using the [*Euclidean algorithm*](http://en.wikipedia.org/wiki/Euclidean_algorithm) for two or more integers.
   - Add to the created class methods that implement the [*Stein algorithm*](http://en.wikipedia.org/wiki/Binary_GCD_algorithm) (binary Euclidean algorithm).
   - Class methods in addition to calculating the GCD should measure the time required to perform the calculation.
