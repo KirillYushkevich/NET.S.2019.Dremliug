@@ -13,16 +13,14 @@ namespace NET.S._2019.Dremliug._04
         /// <returns> A string created from the binary representation of a given double number. </returns>
         public static string ToBinaryString(this double number)
         {
-
-            char[] bitsAsChar = new char[64];
-
             ulong rawBits;
             unsafe
             {
                 rawBits = *(ulong*)&number;
             }
 
-            for (int i = 0; i < 64; i++)
+            char[] bitsAsChar = new char[64];
+            for (int i = 0; i <= 63; i++)
             {
                 // Check each bit state and set the corresponding char. The bits remain in their original order.
                 bitsAsChar[i] = (rawBits & ((ulong)1 << (63 - i))) == 0 ? '0' : '1';

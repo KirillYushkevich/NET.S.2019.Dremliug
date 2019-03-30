@@ -49,10 +49,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DoubleExtensions.cs" />
-    <Compile Include="GCDseeker.cs" />
+    <Compile Include="GCDfinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\DoubleExtensionsTests.cs" />
-    <Compile Include="Tests\GCDseekerTests.cs" />
+    <Compile Include="Tests\GCDfinderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
