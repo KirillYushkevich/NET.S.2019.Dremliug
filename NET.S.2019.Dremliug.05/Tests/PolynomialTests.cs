@@ -135,15 +135,17 @@ namespace NET.S._2019.Dremliug._05.Tests
         }
         #endregion
 
-        [TestCase(new double[] { 1d, 2d, 3d }, ExpectedResult = "3*x^2 + 2*x + 1")]
-        [TestCase(new double[] { 0d, 2d, 3d }, ExpectedResult = "3*x^2 + 2*x")]
-        //[TestCase(new double[] { 1d, 2d }, ExpectedResult = "2*x + 1")]
-        [TestCase(new double[] { 0.0, -1, -1.0, -56.0, 345.223 }, ExpectedResult = "345.223*x^4 - 56*x^3 - 1*x^2 - 1*x")]
+        #region ToString
+        [TestCase(new double[] { 1d, 2d, 3d }, ExpectedResult = "3x^2 + 2x + 1")]
+        [TestCase(new double[] { 0d, 2d, 3d }, ExpectedResult = "3x^2 + 2x")]
+        [TestCase(new double[] { 1d, 2d }, ExpectedResult = "2x + 1")]
+        [TestCase(new double[] { 0.0, -1, -1.0, -56.0, 345.223 }, ExpectedResult = "345.223x^4 - 56x^3 - 1x^2 - 1x")]
         public string ToStringTest(double[] arr)
         {
             Polynomial polynomial = new Polynomial(arr);
 
             return polynomial.ToString();
-        }
+        } 
+        #endregion
     }
 }

@@ -94,34 +94,37 @@ namespace NET.S._2019.Dremliug._05
 
             int length = _coeffs.Length;
 
-            sb.Append($"{_coeffs[length - 1]}*x^{length - 1} ");
-
-            for (int i = length - 2; i >= 2; i--)
+            for (int i = length - 1; i >= 0; i--)
             {
                 if (_coeffs[i] != 0)
                 {
-                    sb.Append($"{withSign(_coeffs[i])}*x^{i} ");
+                    sb.Append($"{withSign(_coeffs[i])}");
+                    if (i == 1)
+                    {
+                        sb.Append($"x");
+                    }
+                    else if (i > 1)
+                    {
+                        sb.Append($"x^{i}");
+                    }
                 }
             }
 
-            if (_coeffs[1] != 0)
-            {
-                sb.Append($"{withSign(_coeffs[1])}*x ");
-            }
-            if (_coeffs[0] != 0)
-            {
-                sb.Append($"{withSign(_coeffs[0])}");
-            }
+            sb.Remove(0, 3);
 
-            return sb.ToString().Trim();
+            return sb.ToString();
 
             string withSign(double value)
             {
-                return value > 0 ? $"+ {value}" : $"- {-value}";
+                return value > 0 ? $" + {value}" : $" - {-value}";
             }
         }
         #endregion
 
+        /// <summary>
+        /// Creates a <see cref="double"/>[] array of coefficients from a <see cref="Polynomial"/>.
+        /// </summary>
+        /// <returns></returns>
         public double[] ToArray() => _coeffs.ToArray();
 
         #region overloaded operators
