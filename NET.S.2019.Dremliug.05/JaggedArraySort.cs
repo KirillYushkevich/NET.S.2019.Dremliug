@@ -43,7 +43,7 @@ namespace NET.S._2019.Dremliug._05
         {
 
             // Select a method for calculating the sort key.
-            Func<IEnumerable<int>, Func<int, long>, long> calculateKey = Enumerable.Sum;
+            Func<IEnumerable<int>, Func<int, long>, long> calculateKey;
             switch (mode)
             {
                 case Mode.Sum:
@@ -54,6 +54,9 @@ namespace NET.S._2019.Dremliug._05
                     break;
                 case Mode.Min:
                     calculateKey = Enumerable.Min;
+                    break;
+                default:
+                    calculateKey = Enumerable.Sum;
                     break;
             }
 
@@ -68,7 +71,7 @@ namespace NET.S._2019.Dremliug._05
                 }
                 else
                 {
-                    sortKeys[i] = (calculateKey(jaggedMatrix[i], (x) => x), jaggedMatrix[i]);
+                    sortKeys[i] = (calculateKey(jaggedMatrix[i], (int x) => (long)x), jaggedMatrix[i]);
                 }
             }
 
