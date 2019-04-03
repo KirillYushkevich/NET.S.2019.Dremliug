@@ -10,7 +10,43 @@ namespace NET.S._2019.Dremliug._05
     /// <summary> Floating-point polynomial in one variable. </summary>
     public sealed class Polynomial : IEquatable<Polynomial>
     {
+        #region fields
         private readonly double[] _coeffs;
+        #endregion
+
+        #region Properties
+        /// <summary>
+        /// The degree of polynomial.
+        /// </summary>
+        public int Degree { get; }
+
+        public double this[int index]
+        {
+            get
+            {
+                try
+                {
+                    return _coeffs[index];
+                }
+                // Suppress the exception of a private field to keep the details private and throw a new one from the indexer.
+                catch (IndexOutOfRangeException)
+                {
+                    throw new IndexOutOfRangeException($"{index}");
+                }
+            }
+            set {
+                try
+                {
+                    _coeffs[index] = value;
+                }
+                // Suppress the exception of a private field to keep the details private and throw a new one from the indexer.
+                catch (IndexOutOfRangeException)
+                {
+                    throw new IndexOutOfRangeException($"{index}");
+                }
+            }
+        }
+        #endregion
 
         #region Constructor
         /// <summary>
@@ -49,13 +85,6 @@ namespace NET.S._2019.Dremliug._05
             // Set the degree of polynomial.
             Degree = highestDegreeWithNonZeroCoeff;
         }
-        #endregion
-
-        #region Properties
-        /// <summary>
-        /// The degree of polynomial.
-        /// </summary>
-        public int Degree { get; }
         #endregion
 
         #region Equality
@@ -130,44 +159,61 @@ namespace NET.S._2019.Dremliug._05
         #region overloaded operators
         public static Polynomial operator +(Polynomial left, Polynomial right)
         {
-            double[] leftA = left.ToArray();
-            double[] rightA = right.ToArray();
+            (double[] leftAsArray, double[] rightAsArray) = TryOperandsAsArrays(left, right);
 
             // Zip both arrays + remaining elements of the left if any + remaining elements of the right if any.
-            return new Polynomial(leftA.Zip(rightA, (x, y) => x + y)
-                                        .Concat(leftA.Skip(rightA.Length))
-                                        .Concat(rightA.Skip(leftA.Length))
+            return new Polynomial(leftAsArray.Zip(rightAsArray, (x, y) => x + y)
+                                        .Concat(leftAsArray.Skip(rightAsArray.Length))
+                                        .Concat(rightAsArray.Skip(leftAsArray.Length))
                                         .ToArray());
         }
 
         public static Polynomial operator -(Polynomial left, Polynomial right)
         {
-            double[] leftA = left.ToArray();
-            double[] rightA = right.ToArray();
+            (double[] leftAsArray, double[] rightAsArray) = TryOperandsAsArrays(left, right);
 
             // Zip both arrays + remaining elements of the left if any + remaining elements of the right multiplied by -1 if any.
-            return new Polynomial(leftA.Zip(rightA, (x, y) => x - y)
-                                        .Concat(leftA.Skip(rightA.Length))
-                                        .Concat(rightA.Skip(leftA.Length).Select((x) => -x))
+            return new Polynomial(leftAsArray.Zip(rightAsArray, (x, y) => x - y)
+                                        .Concat(leftAsArray.Skip(rightAsArray.Length))
+                                        .Concat(rightAsArray.Skip(leftAsArray.Length).Select((x) => -x))
                                         .ToArray());
         }
 
         public static Polynomial operator *(Polynomial left, Polynomial right)
         {
-            double[] leftA = left.ToArray();
-            double[] rightA = right.ToArray();
-            double[] result = new double[leftA.Length + rightA.Length - 1];
+            (double[] leftAsArray, double[] rightAsArray) = TryOperandsAsArrays(left, right);
 
-            for (int i = 0; i < leftA.Length; i++)
+            double[] result = new double[leftAsArray.Length + rightAsArray.Length - 1];
+
+            for (int i = 0; i < leftAsArray.Length; i++)
             {
-                for (int j = 0; j < rightA.Length; j++)
+                for (int j = 0; j < rightAsArray.Length; j++)
                 {
-                    result[i + j] += leftA[i] * rightA[j];
+                    result[i + j] += leftAsArray[i] * rightAsArray[j];
                 }
             }
 
             return new Polynomial(result);
         }
+
+        #region private TryOperandsAsArrays()
+        /// <summary>
+        /// Tries to convert two <see cref="Polynomial"/> to arrays.
+        /// </summary>
+        /// <param name="left"> Left <see cref="Polynomial"/> operand. </param>
+        /// <param name="right"> Right <see cref="Polynomial"/> operand. </param>
+        /// <returns> (left <see cref="double"/>[], right <see cref="double"/>[]) </returns>
+        /// <exception cref="ArgumentNullException"> Thrown when <paramref name="left"/> or <paramref name="right"/> is null. </exception>
+        private static (double[], double[]) TryOperandsAsArrays(Polynomial left, Polynomial right)
+        {
+            if (left is null || right is null)
+            {
+                throw new ArgumentNullException($"left is {left?.GetType().ToString() ?? "null"}, right is {right?.GetType().ToString() ?? "null" }");
+            }
+
+            return (left.ToArray(), right.ToArray());
+        }
+        #endregion
         #endregion
     }
 }
