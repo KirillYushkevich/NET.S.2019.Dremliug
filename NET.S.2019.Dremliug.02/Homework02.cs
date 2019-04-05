@@ -10,7 +10,6 @@ namespace NET.S._2019.Dremliug._02
     public static class Homework02
     {
         #region InsertNumber
-
         /// <summary> Copies bits of a <paramref name="source"/> number into [<paramref name="startOfBitRange"/>, <paramref name="endOfBitRange"/>] range of a <paramref name="target"/> number. </summary>
         /// <param name="target"> An integer to insert bits into. </param>
         /// <param name="source"> An integer to insert bits from. </param>
@@ -34,11 +33,9 @@ namespace NET.S._2019.Dremliug._02
             // Replace bits in the target number and return the result.
             return (target & ~(mask << startOfBitRange)) | (takenBitField << startOfBitRange);
         }
-
         #endregion
 
         #region FindNextBiggerNumber
-
         /// <summary> Takes a positive integer number and returns the nearest largest integer consisting of the digits of the original number, -1 if no such number exists. </summary>
         /// <param name="number"> A positive integer number. </param>
         /// <returns> The nearest largest integer consisting of the digits of the original number; -1 if no such number exists. </returns>
@@ -63,13 +60,17 @@ namespace NET.S._2019.Dremliug._02
             {
                 digits.Add(numberRemains % 10);
                 numberRemains /= 10;
-            } while (numberRemains > 0);
+            }
+            while (numberRemains > 0);
 
             // Search for a position that has a higher digit value than the digit in previous position.
             int index;
             for (index = 1; index < digits.Count; index++)
             {
-                if (digits[index - 1] > digits[index]) break;
+                if (digits[index - 1] > digits[index])
+                {
+                    break;
+                }
             }
 
             // If failed to find then NextBigger does not exist.
@@ -90,7 +91,10 @@ namespace NET.S._2019.Dremliug._02
             {
                 try
                 {
-                    checked { newNumber += digits[i] * (int)Math.Pow(10, i); }
+                    checked
+                    {
+                        newNumber += digits[i] * (int)Math.Pow(10, i);
+                    }
                 }
                 catch (OverflowException)
                 {
@@ -101,11 +105,9 @@ namespace NET.S._2019.Dremliug._02
 
             return newNumber;
         }
-
         #endregion
 
         #region TimeElapsed
-
         /// <summary>
         /// Displays an execution time of FindNextBiggerNumber method.
         /// </summary>
@@ -122,19 +124,14 @@ namespace NET.S._2019.Dremliug._02
 
             return watch.Elapsed;
         }
-
         #endregion
 
         #region FilterDigit
-
         /// <summary> Takes a list of integers and filters the list so that only numbers containing the specified digit are left. </summary>
         /// <param name="list"> A list of integers. </param>
         /// <param name="digit"> A digit to search for. </param>
         public static void FilterDigit(ref List<int> list, int digit)
         {
-
-            #region Parameter validation
-
             if (list is null)
             {
                 throw new ArgumentNullException("list");
@@ -150,8 +147,6 @@ namespace NET.S._2019.Dremliug._02
                 throw new ArgumentOutOfRangeException("digit", $"digit must be in [0, 9] range; {digit}");
             }
 
-            #endregion
-
             var filteredList = new List<int>(list.Count);
             var alreadySeenElements = new HashSet<int>(list.Count);
             int currentElement;
@@ -163,6 +158,7 @@ namespace NET.S._2019.Dremliug._02
                 {
                     alreadySeenElements.Add(v);
                     currentElement = Math.Abs(v);
+
                     // Check every digit of each number.
                     do
                     {
@@ -172,31 +168,28 @@ namespace NET.S._2019.Dremliug._02
                             alreadySeenElements.Add(v);
                             break;
                         }
+
                         currentElement /= 10;
-                    } while (currentElement > 0);
+                    }
+                    while (currentElement > 0);
                 }
             }
 
             // Set reference to the filtered list.
             list = filteredList;
         }
-
         #endregion
 
         #region FindNthRoot
-
         /// <summary>
         /// Calculates the nth root of a number by the Newton method with a given accuracy.
         /// </summary>
         /// <param name="number"> A number to calculate root from. </param>
         /// <param name="degree"> A degree of the root. </param>
         /// <param name="precision"> An accuracy of the result. </param>
-        /// <returns> <paramref name="Degree"/>-th root of the <paramref name="number"/> with the <paramref name="precision"/>. </returns>
+        /// <returns> <paramref name="Degree"/> root of the <paramref name="number"/> with the <paramref name="precision"/>. </returns>
         public static double FindNthRoot(double number, int degree, double precision)
         {
-
-            #region Parameter validation
-
             if (double.IsNaN(number) || double.IsInfinity(number))
             {
                 throw new ArgumentOutOfRangeException("number", $"number must be a real number; {number}");
@@ -212,8 +205,6 @@ namespace NET.S._2019.Dremliug._02
                 throw new ArgumentOutOfRangeException("precision", $"precision must be in (0, 1) range; {precision}");
             }
 
-            #endregion
-
             int numberOfFractionalDigits = 0;
             while (precision < 1 && numberOfFractionalDigits < 16)
             {
@@ -228,22 +219,22 @@ namespace NET.S._2019.Dremliug._02
             }
 
             double x0;
+
             // Guess an initial value of x1.
             double x1 = 1;
             do
             {
                 x0 = x1;
-                x1 += (number / Math.Pow(x1, degree - 1.0) - x1) / degree;
+                x1 += ((number / Math.Pow(x1, degree - 1.0)) - x1) / degree;
             }
+            while (Math.Abs(x0 - x1) > Math.Pow(10, -16));
+
             // (10 ^ -16) difference is the precision limit. Further computations won't change x1.
             // If an endless loop happens, decrease to (10 ^ -15).
-            while (Math.Abs(x0 - x1) > Math.Pow(10, -16));
 
             // Round to the required precision.
             return Math.Round(x1, numberOfFractionalDigits);
-
         }
-
         #endregion
     }
 }

@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace NET.S._2019.Dremliug._04
 {
     [TestFixture]
-    class DoubleExtensionsTests
+    public class DoubleExtensionsTests
     {
         [TestCase(-255.255)]
         [TestCase(255.255)]
@@ -41,6 +41,5 @@ namespace NET.S._2019.Dremliug._04
         [TestCase(0.0, ExpectedResult = "0000000000000000000000000000000000000000000000000000000000000000")]
         public string ToBinaryStringTests_HardcodedResults(double number)
             => number.ToBinaryString();
-
     }
 }

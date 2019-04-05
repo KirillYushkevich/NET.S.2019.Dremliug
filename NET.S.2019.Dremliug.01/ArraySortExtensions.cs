@@ -7,13 +7,10 @@ namespace NET.S._2019.Dremliug._01
     public static class ArraySortExtensions
     {
         #region MergeSort
-
         /// <summary> Sorts with Quick sort algorithm. </summary>
         /// <param name="array"></param>
         public static void MergeSort(this int[] array)
         {
-            #region Validation
-
             if (array is null)
             {
                 throw new ArgumentNullException();
@@ -24,10 +21,6 @@ namespace NET.S._2019.Dremliug._01
                 return;
             }
 
-            #endregion
-
-            #region Initialization
-
             // Queue will contain sorted arrays.
             Queue<int[]> partsToMerge = new Queue<int[]>();
 
@@ -36,10 +29,6 @@ namespace NET.S._2019.Dremliug._01
             {
                 partsToMerge.Enqueue(new int[] { v });
             }
-
-            #endregion
-
-            #region Processing
 
             while (partsToMerge.Count > 1)
             {
@@ -99,10 +88,7 @@ namespace NET.S._2019.Dremliug._01
             {
                 array[i] = sorted[i];
             }
-
-            #endregion
         }
-
         #endregion
 
         #region QuickSort
@@ -111,8 +97,6 @@ namespace NET.S._2019.Dremliug._01
         /// <param name="array"></param>
         public static void QuickSort(this int[] array)
         {
-            #region Validation
-
             if (array is null)
             {
                 throw new ArgumentNullException();
@@ -122,10 +106,6 @@ namespace NET.S._2019.Dremliug._01
             {
                 return;
             }
-
-            #endregion
-
-            #region Processing
 
             QuickSortRecursive(array, 0, array.Length - 1);
 
@@ -138,6 +118,7 @@ namespace NET.S._2019.Dremliug._01
 
                     // Sort to the left of the pivot position. 
                     QuickSortRecursive(arr, startIndex, pivotIndex - 1);
+
                     // Sort to the right of the pivot position.
                     QuickSortRecursive(arr, pivotIndex + 1, endIndex);
                 }
@@ -173,12 +154,7 @@ namespace NET.S._2019.Dremliug._01
                 // Return the index of the pivot.
                 return indexOfLastSmaller;
             }
-
-            #endregion
         }
-
         #endregion
     }
-
 }
-

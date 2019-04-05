@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,11 +40,11 @@ namespace NET.S._2019.Dremliug._04
 
         #region private FindGCD(): does the job.
         /// <summary> Finds the GCD of two or more integers by the selected algorithm. </summary>
-        /// <param name="GCDalgorithm"> Selected algorithm. </param>
+        /// <param name="gcdAlgorithm"> Selected algorithm. </param>
         /// <param name="elapsedTime"> Time spent on calculations. </param>
         /// <param name="numbers"> Numbers whose GCD is to be found. </param>
         /// <returns> The GCD of given integers. </returns>
-        private static int FindGCD(Func<int, int, int> GCDalgorithm, out TimeSpan elapsedTime, params int[] numbers)
+        private static int FindGCD(Func<int, int, int> gcdAlgorithm, out TimeSpan elapsedTime, params int[] numbers)
         {
             if (numbers is null)
             {
@@ -60,7 +60,7 @@ namespace NET.S._2019.Dremliug._04
             int currentGCD = numbers[0];
             for (int i = 1; i < numbers.Length; i++)
             {
-                currentGCD = GCDalgorithm(currentGCD, numbers[i]);
+                currentGCD = gcdAlgorithm(currentGCD, numbers[i]);
             }
             watch.Stop();
 
@@ -78,7 +78,6 @@ namespace NET.S._2019.Dremliug._04
         /// <returns> The GCD of two given integers. </returns>
         private static int EuclideanAlgorithm(int a, int b)
         {
-
             if (a == 0 && b == 0)
             {
                 throw new ArgumentException("GCD of 0 and 0 is undefined");
@@ -120,7 +119,6 @@ namespace NET.S._2019.Dremliug._04
         /// <returns> The GCD of two given integers. </returns>
         private static int SteinAlgorithm(int a, int b)
         {
-
             if (a == 0 && b == 0)
             {
                 throw new ArgumentException("GCD of 0 and 0 is undefined");
@@ -145,6 +143,7 @@ namespace NET.S._2019.Dremliug._04
             // Otherwise both are odd, and gcd(argA, argB) = gcd( |argA - argB| / 2, argB).
 
             int shift = 0;
+
             // While both argA and argB are even.
             while (((argA | argB) & 1) == 0)
             {
@@ -166,11 +165,13 @@ namespace NET.S._2019.Dremliug._04
                 {
                     argB >>= 1;
                 }
+
                 if (argA > argB)
                 {
                     // Swap.
                     (argA, argB) = (argB, argA);
                 }
+
                 argB -= argA;
             } while (argB != 0);
 
@@ -179,6 +180,5 @@ namespace NET.S._2019.Dremliug._04
         #endregion 
         
         #endregion
-
     }
 }

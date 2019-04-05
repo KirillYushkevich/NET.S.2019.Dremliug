@@ -8,9 +8,8 @@ using NUnit.Framework;
 namespace NET.S._2019.Dremliug._02.Tests
 {
     [TestFixture]
-    class Homework02Tests
+    public class Homework02Tests
     {
-
         #region InsertNumber
 
         [TestCase(15, 15, 0, 0, ExpectedResult = 15)]

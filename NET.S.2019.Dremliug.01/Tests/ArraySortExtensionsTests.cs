@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 namespace NET.S._2019.Dremliug._01.ArraySortExtensionsTests
 {
-    class ArraySortExtensionsTests
+    public class ArraySortExtensionsTests
     {
         #region SortTests
 

@@ -1,5 +1,4 @@
-﻿
-namespace NET.S._2019.Dremliug._04
+﻿namespace NET.S._2019.Dremliug._04
 {
     /// <summary>
     /// Provides extension method for doubles.

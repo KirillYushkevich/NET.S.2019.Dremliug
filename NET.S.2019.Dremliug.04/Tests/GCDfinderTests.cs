@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace NET.S._2019.Dremliug._04.Tests
 {
     [TestFixture]
-    class GCDfinderTests
+    public class GCDfinderTests
     {
         #region Test data
         private static IEnumerable<TestCaseData> DataForGCDTests
@@ -31,7 +31,7 @@ namespace NET.S._2019.Dremliug._04.Tests
         {
             get
             {
-                yield return new TestCaseData(new int[] {});
+                yield return new TestCaseData(new int[] { });
                 yield return new TestCaseData(new[] { 1 });
                 yield return new TestCaseData(new[] { 48 });
                 yield return new TestCaseData(new[] { 0, 0 });

@@ -1,5 +1,4 @@
-﻿using NET.S._2019.Dremliug._02;
-using System;
+﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace NET.S._2019.Dremliug._02.Tests
