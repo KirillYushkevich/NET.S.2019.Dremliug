@@ -9,4 +9,4 @@
 
 - [05 Day](https://github.com/deNoor/NET.S.2019.Dremliug/tree/master/NET.S.2019.Dremliug.05): Polynomial; Jagged array sort.
 
-- [06 Day](https://github.com/deNoor/NET.S.2019.Dremliug/tree/master/NET.S.2019.Dremliug.06): Book storage; Bank account.
+- [08 Day](https://github.com/deNoor/NET.S.2019.Dremliug/tree/master/NET.S.2019.Dremliug.08): Book storage; Bank account.
