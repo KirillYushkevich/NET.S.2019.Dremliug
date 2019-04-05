@@ -19,16 +19,6 @@ namespace NET.S._2019.Dremliug._05.Tests
         public void CtorThrows_ArgNullExc() =>
             Assert.Throws<ArgumentNullException>(() => new Polynomial(null));
 
-        [TestCase(3)]
-        [TestCase(-1)]
-        public void IndexerGetThrows_IndexOutOfRangeExc(int index)
-        {
-            Polynomial p = new Polynomial(14.0, 16.3, -4.8);
-            double x;
-
-            Assert.Throws<IndexOutOfRangeException>(() => x = p[index]);
-        }
-
         [Test]
         public void CtorSuccess()
         {
@@ -40,13 +30,38 @@ namespace NET.S._2019.Dremliug._05.Tests
         #endregion
 
         #region Indexer Tests
+        // Set indexer is private currently.
+
+        //[TestCase(3)]
+        //[TestCase(-1)]
+        //public void IndexerSetThrows_IndexOutOfRangeExc(int index)
+        //{
+        //    Polynomial p = new Polynomial(14.0, 16.3, -4.8);
+
+        //    Assert.Throws<IndexOutOfRangeException>(() => p[index] = 19.7);
+        //}
+
+        //[Test]
+        //public void IndexerSetSuccess()
+        //{
+        //    Polynomial actual = new Polynomial(14.0, 16.3, -4.8);
+        //    Polynomial expected = new Polynomial(2, 3, -4);
+
+        //    actual[0] = 2;
+        //    actual[1] = 3;
+        //    actual[2] = -4;
+
+        //    Assert.IsTrue(actual.ToArray().SequenceEqual(expected.ToArray()));
+        //}
+
         [TestCase(3)]
         [TestCase(-1)]
-        public void IndexerSetThrows_IndexOutOfRangeExc(int index)
+        public void IndexerGetThrows_IndexOutOfRangeExc(int index)
         {
             Polynomial p = new Polynomial(14.0, 16.3, -4.8);
+            double x;
 
-            Assert.Throws<IndexOutOfRangeException>(() => p[index] = 19.7);
+            Assert.Throws<IndexOutOfRangeException>(() => x = p[index]);
         }
 
         [TestCase(0, ExpectedResult = 14.0)]
@@ -58,19 +73,6 @@ namespace NET.S._2019.Dremliug._05.Tests
 
             return p[index];
         }
-
-        [Test]
-        public void IndexerSetSuccess()
-        {
-            Polynomial actual = new Polynomial(14.0, 16.3, -4.8);
-            Polynomial expected = new Polynomial(2, 3, -4);
-
-            actual[0] = 2;
-            actual[1] = 3;
-            actual[2] = -4;
-
-            Assert.IsTrue(actual.ToArray().SequenceEqual(expected.ToArray()));
-        } 
         #endregion
 
         #region Equality Tests

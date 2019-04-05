@@ -12,6 +12,7 @@ namespace NET.S._2019.Dremliug._05
     {
         #region fields
         private readonly double[] _coeffs;
+        int? _cachedHashCode = null;
         #endregion
 
         #region Properties
@@ -34,7 +35,8 @@ namespace NET.S._2019.Dremliug._05
                     throw new IndexOutOfRangeException($"{index}");
                 }
             }
-            set {
+            // Do not let anyone mutate _coeffs. HashCode is cached based on _coeffs values and does not currently support recalculation.
+            private set {
                 try
                 {
                     _coeffs[index] = value;
@@ -95,19 +97,27 @@ namespace NET.S._2019.Dremliug._05
 
         public bool Equals(Polynomial other)
         {
-            return other != null &&
-                   this.ToArray().SequenceEqual(other.ToArray());
+            return ReferenceEquals(this, other) || 
+                   (other != null &&
+                   this.GetType() == other.GetType() &&
+                   this.Degree == other.Degree &&
+                   this.ToArray().SequenceEqual(other.ToArray()));
         }
 
         public override int GetHashCode()
         {
-            return ((IStructuralEquatable)_coeffs).GetHashCode(EqualityComparer<double>.Default);
+            if (!_cachedHashCode.HasValue)
+            {
+                _cachedHashCode = ((IStructuralEquatable)_coeffs).GetHashCode(EqualityComparer<double>.Default);
+            }
+
+            return _cachedHashCode.Value;
         }
 
         public static bool operator ==(Polynomial polynomial1, Polynomial polynomial2)
         {
             return ReferenceEquals(polynomial1, polynomial2) ||
-                (polynomial1?.ToArray().SequenceEqual(polynomial2?.ToArray() ?? Enumerable.Empty<double>()) ?? false);
+                (polynomial1?.Equals(polynomial2) ?? false);
         }
 
         public static bool operator !=(Polynomial polynomial1, Polynomial polynomial2)
