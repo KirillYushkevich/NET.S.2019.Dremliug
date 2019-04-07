@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NET.S._2019.Dremliug._08
+namespace BookTask
 {
     public class BookListService : IBookService
     {
