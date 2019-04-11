@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace BookTask
 {
-    class ConsoleLauncher
+    internal class ConsoleLauncher
     {
-        public static Book[] newBooks = new[] {
+        private static Book[] newBooks = new[]
+        {
             new Book(0143105426, "Jane Austen", "Pride and Prejudice", "Penguin Classics", 2009),
             new Book(null, "Howard I. Chapelle", "The History of The American Sailing Ships", "W. W. Norton", 1935),
             new Book(0670022691, "Amor Towles", "Rules of Civility", "Viking", 2011),
@@ -32,9 +33,10 @@ namespace BookTask
             {
                 Console.WriteLine(book.ToString());
             }
+
             Console.WriteLine();
 
-            foreach  (Book book in newBooks)
+            foreach (Book book in newBooks)
             {
                 try
                 {

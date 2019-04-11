@@ -8,8 +8,12 @@ namespace BankAccount
 {
     internal class AccountStorageException : BankAccountException
     {
-        public AccountStorageException() : base() { }
+        public AccountStorageException() : base()
+        {
+        }
 
-        public AccountStorageException(string message = null) : base(message) { }
+        public AccountStorageException(string message = null) : base(message)
+        {
+        }
     }
 }

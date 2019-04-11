@@ -20,7 +20,7 @@ namespace BookTask
 
         public void AddBook(Book book)
         {
-            if(book is null)
+            if (book is null)
             {
                 throw new ArgumentNullException($"Book must not be null");
             }
@@ -41,7 +41,7 @@ namespace BookTask
                 throw new ArgumentNullException($"Book must not be null");
             }
 
-            if (! set.Contains(book))
+            if (!set.Contains(book))
             {
                 throw new ArgumentException($"Book not found");
             }

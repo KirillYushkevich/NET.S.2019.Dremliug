@@ -8,6 +8,5 @@ namespace BankAccount
 {
     internal interface IAccountControlService
     {
-
     }
 }

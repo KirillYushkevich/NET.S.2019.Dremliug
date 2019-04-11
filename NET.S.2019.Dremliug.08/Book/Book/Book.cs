@@ -16,16 +16,6 @@ namespace BookTask
         private string _cachedString = null;
         #endregion
 
-        #region Properties
-        public ulong? Isbn { get; private set; }
-        public string Author { get; private set; }
-        public string Title { get; private set; }
-        public string Publisher { get; private set; }
-        public int? Year { get; private set; }
-        public int? Pages { get; private set; }
-        public decimal? Price { get; private set; }
-        #endregion
-
         #region Constructor
         public Book(ulong? isbn, string author = null, string title = null, string publisher = null, int? year = null, int? pages = null, decimal? price = null)
         {
@@ -41,46 +31,44 @@ namespace BookTask
         }
         #endregion
 
-        /// <summary>
-        /// Updates <see cref="Book"/> properties with given values.
-        /// </summary>
-        /// <param name="isbn"></param>
-        /// <param name="author"></param>
-        /// <param name="title"></param>
-        /// <param name="publisher"></param>
-        /// <param name="year"></param>
-        /// <param name="pages"></param>
-        /// <param name="price"></param>
-        public void Update(ulong? isbn = null, string author = null, string title = null, string publisher = null, int? year = null, int? pages = null, decimal? price = null)
-        {
-            CheckValues(isbn, author, title, publisher, year, pages, price);
+        #region Properties
+        public ulong? Isbn { get; private set; }
 
-            Isbn = isbn ?? Isbn;
-            Author = author ?? Author;
-            Title = title ?? Title;
-            Publisher = publisher ?? Publisher;
-            Year = year ?? Year;
-            Pages = pages ?? Pages;
-            Price = price ?? Price;
+        public string Author { get; private set; }
 
-            _cachedHashcode = null;
-            _cachedString = null;
-        }
+        public string Title { get; private set; }
+
+        public string Publisher { get; private set; }
+
+        public int? Year { get; private set; }
+
+        public int? Pages { get; private set; }
+
+        public decimal? Price { get; private set; }
+        #endregion
 
         #region IEquatable<T>
-        public override bool Equals(object obj) => Equals(obj as Book);
+        public static bool operator ==(Book book1, Book book2)
+        {
+            return EqualityComparer<Book>.Default.Equals(book1, book2);
+        }
+
+        public static bool operator !=(Book book1, Book book2)
+        {
+            return !(book1 == book2);
+        }
+
+        public override bool Equals(object obj) => this.Equals(obj as Book);
 
         public bool Equals(Book other)
         {
             return ReferenceEquals(this, other) ||
-                (
-                other != null &&
+                (other != null &&
                 this.GetType() == other.GetType() &&
 
                 // Pages and Price are not checked and can be safely modified from the outside.
                 (this.Isbn, this.Author, this.Title, this.Publisher, this.Year) ==
-                (other.Isbn, other.Author, other.Title, other.Publisher, other.Year)
-                );
+                (other.Isbn, other.Author, other.Title, other.Publisher, other.Year));
         }
 
         public override int GetHashCode()
@@ -91,16 +79,6 @@ namespace BookTask
             }
 
             return _cachedHashcode.Value;
-        }
-
-        public static bool operator ==(Book book1, Book book2)
-        {
-            return EqualityComparer<Book>.Default.Equals(book1, book2);
-        }
-
-        public static bool operator !=(Book book1, Book book2)
-        {
-            return !(book1 == book2);
         }
         #endregion
 
@@ -132,9 +110,35 @@ namespace BookTask
         }
         #endregion
 
+        /// <summary>
+        /// Updates <see cref="Book"/> properties with given values.
+        /// </summary>
+        /// <param name="isbn"></param>
+        /// <param name="author"></param>
+        /// <param name="title"></param>
+        /// <param name="publisher"></param>
+        /// <param name="year"></param>
+        /// <param name="pages"></param>
+        /// <param name="price"></param>
+        public void Update(ulong? isbn = null, string author = null, string title = null, string publisher = null, int? year = null, int? pages = null, decimal? price = null)
+        {
+            CheckValues(isbn, author, title, publisher, year, pages, price);
+
+            Isbn = isbn ?? Isbn;
+            Author = author ?? Author;
+            Title = title ?? Title;
+            Publisher = publisher ?? Publisher;
+            Year = year ?? Year;
+            Pages = pages ?? Pages;
+            Price = price ?? Price;
+
+            _cachedHashcode = null;
+            _cachedString = null;
+        }
+
         #region private helper methods
         /// <summary>
-        /// Helper method to check input parametes.
+        /// Helper method to check input parameters.
         /// </summary>
         /// <exception cref="ArgumentException">Thrown if any parameter is incorrect.</exception>
         private void CheckValues(ulong? isbn, string author, string title, string publisher, int? year, int? pages, decimal? price)

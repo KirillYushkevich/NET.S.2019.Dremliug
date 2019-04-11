@@ -8,19 +8,30 @@ namespace BankAccount
 {
     internal class AccountOwner : IAccountOwner, IEquatable<AccountOwner>
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-
         public AccountOwner(string firstName, string lastName)
         {
             FirstName = firstName;
             LastName = lastName;
         }
 
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
         #region Equals and GetHashCode
+        public static bool operator ==(AccountOwner owner1, AccountOwner owner2)
+        {
+            return EqualityComparer<AccountOwner>.Default.Equals(owner1, owner2);
+        }
+
+        public static bool operator !=(AccountOwner owner1, AccountOwner owner2)
+        {
+            return !(owner1 == owner2);
+        }
+
         public override bool Equals(object obj)
         {
-            return Equals(obj as AccountOwner);
+            return this.Equals(obj as AccountOwner);
         }
 
         public bool Equals(AccountOwner other)
@@ -33,16 +44,6 @@ namespace BankAccount
         {
             return (FirstName, LastName).GetHashCode();
         }
-
-        public static bool operator ==(AccountOwner owner1, AccountOwner owner2)
-        {
-            return EqualityComparer<AccountOwner>.Default.Equals(owner1, owner2);
-        }
-
-        public static bool operator !=(AccountOwner owner1, AccountOwner owner2)
-        {
-            return !(owner1 == owner2);
-        } 
         #endregion
     }
 }

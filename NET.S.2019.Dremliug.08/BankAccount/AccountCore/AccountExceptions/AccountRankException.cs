@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace BankAccount
 {
-    internal class AccountServiceException : BankAccountException
+    internal class AccountRankException : BankAccountException
     {
-        public AccountServiceException() : base()
+        public AccountRankException() : base()
         {
         }
 
-        public AccountServiceException(string message) : base(message)
+        public AccountRankException(string message) : base(message)
         {
         }
     }

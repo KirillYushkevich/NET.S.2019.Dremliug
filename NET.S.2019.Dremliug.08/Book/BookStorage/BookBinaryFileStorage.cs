@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace BookTask
 {
-    class BookBinaryFileStorage : IBookStorage
+    internal class BookBinaryFileStorage : IBookStorage
     {
         private readonly string _filePath = "SavedBooks.bin";
 
         public BookBinaryFileStorage(string filePath = null)
         {
-            if(filePath != null)
+            if (filePath != null)
             {
                 _filePath = filePath;
             }
@@ -23,7 +23,7 @@ namespace BookTask
         {
             using (BinaryWriter writer = new BinaryWriter(File.Open(_filePath, FileMode.Create)))
             {
-                foreach(Book book in books)
+                foreach (Book book in books)
                 {
                     writer.Write(book.Isbn ?? 0);
                     writer.Write(book.Isbn.HasValue);

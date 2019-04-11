@@ -49,13 +49,13 @@ namespace BankAccount
                         AccountRank rank = (AccountRank)reader.ReadInt32();
                         int bonuspoints = reader.ReadInt32();
 
-                        currentAccount = new AccountTemplate(id, owner, balance, rank);
+                        currentAccount = new AccountCore(id, owner, balance, rank);
                         currentAccount.Status = status;
                         currentAccount.BonusPoints = bonuspoints;
                     }
-
-                    // Log account reading errors.
-                    catch(BankAccountException){ }
+                    catch (BankAccountException)
+                    {
+                    }
 
                     yield return currentAccount;
                 }

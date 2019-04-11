@@ -9,6 +9,7 @@ namespace BankAccount
     internal interface IAccountOwner
     {
         string FirstName { get; set; }
+
         string LastName { get; set; }
     }
 }

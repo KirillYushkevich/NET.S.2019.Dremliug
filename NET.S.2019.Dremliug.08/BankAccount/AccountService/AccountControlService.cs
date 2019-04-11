@@ -44,7 +44,7 @@ namespace BankAccount
 
         public void CreateNew(IAccountOwner owner, AccountRank rank, decimal balance = 0)
         {
-            _setOfAccounts.Add(new AccountTemplate(_nextAvailableID, owner, balance, rank));
+            _setOfAccounts.Add(new AccountCore(_nextAvailableID, owner, balance, rank));
             _nextAvailableID++;
         }
 

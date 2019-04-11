@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 
 namespace BankAccount
 {
-    class BankAccountException : Exception
+    internal class BankAccountException : Exception
     {
-        public BankAccountException() : base() { }
+        public BankAccountException() : base()
+        {
+        }
 
-        public BankAccountException(string message) : base(message) { }
+        public BankAccountException(string message) : base(message)
+        {
+        }
     }
 }

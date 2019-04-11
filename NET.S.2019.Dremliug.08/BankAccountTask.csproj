@@ -43,7 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BankAccount\AccountCore\AccountExceptions.cs" />
+    <Compile Include="BankAccount\AccountCore\AccountExceptions\AccountStatusException.cs" />
+    <Compile Include="BankAccount\AccountCore\AccountExceptions\AccountOwnerException.cs" />
+    <Compile Include="BankAccount\AccountCore\AccountExceptions\AccountRankException.cs" />
     <Compile Include="BankAccount\AccountCore\AccountRanks.cs" />
     <Compile Include="BankAccount\AccountService\AccountControlService.cs" />
     <Compile Include="BankAccount\AccountOwner\IAccountOwner.cs" />
@@ -53,7 +55,7 @@
     <Compile Include="BankAccount\AccountStorage\AccountStorageException.cs" />
     <Compile Include="BankAccount\AccountStorage\IAccountStorage.cs" />
     <Compile Include="BankAccount\AccountCore\AccountStatus.cs" />
-    <Compile Include="BankAccount\AccountCore\AccountTemplate.cs" />
+    <Compile Include="BankAccount\AccountCore\AccountCore.cs" />
     <Compile Include="BankAccount\AccountOwner\Owner.cs" />
     <Compile Include="BankAccount\AccountCore\IBankAccount.cs" />
     <Compile Include="BankAccount\BankAccountException.cs" />
