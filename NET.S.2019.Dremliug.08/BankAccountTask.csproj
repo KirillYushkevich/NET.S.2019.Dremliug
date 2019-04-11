@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -41,9 +43,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BankAccount\AccountControlService.cs" />
-    <Compile Include="BankAccount\AccountTemplate.cs" />
-    <Compile Include="BankAccount\Owner.cs" />
+    <Compile Include="BankAccount\AccountCore\AccountExceptions.cs" />
+    <Compile Include="BankAccount\AccountCore\AccountRanks.cs" />
+    <Compile Include="BankAccount\AccountService\AccountControlService.cs" />
+    <Compile Include="BankAccount\AccountOwner\IAccountOwner.cs" />
+    <Compile Include="BankAccount\AccountService\AccountServiceException.cs" />
+    <Compile Include="BankAccount\AccountService\IAccountControlService.cs" />
+    <Compile Include="BankAccount\AccountStorage\AccountStorageBinaryFile.cs" />
+    <Compile Include="BankAccount\AccountStorage\AccountStorageException.cs" />
+    <Compile Include="BankAccount\AccountStorage\IAccountStorage.cs" />
+    <Compile Include="BankAccount\AccountCore\AccountStatus.cs" />
+    <Compile Include="BankAccount\AccountCore\AccountTemplate.cs" />
+    <Compile Include="BankAccount\AccountOwner\Owner.cs" />
+    <Compile Include="BankAccount\AccountCore\IBankAccount.cs" />
+    <Compile Include="BankAccount\BankAccountException.cs" />
+    <Compile Include="BankAccount\BonusCalculator\BonusCalculator.cs" />
+    <Compile Include="BankAccount\BonusCalculator\IBonusCalculator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
