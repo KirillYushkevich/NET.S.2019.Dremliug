@@ -7,7 +7,7 @@
       - RemoveBook (removes a book if it exists, otherwise throws an exception),
       - FindBookByTag (finds a book by a given criterion),
       - SortBooksByTag(sorts books by a given criterion)
-    - To perform basic operations with a list of books, which can be loaded and/or saved in some **BookListStorage** storage, create the **BookListService** class.
+    - List of books can be loaded from and/or saved to some **BookListStorage** storage.
     - Demonstrate how classes work on the example of a console application.
     - Use a binary file as storage. Only BinaryReader and BinaryWriter are allowed to work with the storage. The storage may change later.
     - **(!)** do not use delegates
