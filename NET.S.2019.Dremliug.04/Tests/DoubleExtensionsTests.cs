@@ -19,9 +19,7 @@ namespace NET.S._2019.Dremliug._04
         [TestCase(0.0)]
         public void ToBinaryStringTests(double number)
         {
-            string str = Convert.ToString(BitConverter.DoubleToInt64Bits(number), 2);
-            string precedingZeroes = new string('0', 64 - str.Length);
-            string expected = precedingZeroes + str;
+            string expected = Convert.ToString(BitConverter.DoubleToInt64Bits(number), 2).PadLeft(64, '0');
 
             string actual = number.ToBinaryString();
 
