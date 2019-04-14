@@ -1,5 +1,5 @@
 
-1. IFormatter for Book (Day 08)
+1. IFormattable for Book (Day 08)
     - For Book class objects, implement additional options for string representation. Examples:
       - Jeffrey Richter, CLR via C#
       - Jeffrey Richter, CLR via C#, "Microsoft Press", 2012
