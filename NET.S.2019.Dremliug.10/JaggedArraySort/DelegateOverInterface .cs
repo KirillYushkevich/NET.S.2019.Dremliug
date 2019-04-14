@@ -67,7 +67,7 @@ namespace JaggedArray.DelegateOverInterface
 
             for (int i = 0; i < jaggedMatrix.Length; i++)
             {
-                if (!(jaggedMatrix[i] is null))
+                if (!(jaggedMatrix[i] is null) && !sortKeys.ContainsKey(jaggedMatrix[i]))
                 {
                     if (!jaggedMatrix[i].Any())
                     {
