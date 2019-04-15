@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using JaggedArray.DelegateInInterface;
+using JaggedArray.DelegateOverInterface;
 using NUnit.Framework;
 
 namespace Tests
