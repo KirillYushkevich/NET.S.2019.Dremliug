@@ -83,7 +83,7 @@ namespace JaggedArray.DelegateOverInterface
             // Sort the matrix.
             launchSort(
 
-                // Create a Comparison<int[]>-compatible delegate.
+                // Create a Comparison<int[]>-compatible object.
                 (x, y) =>
                 Nullable.Compare(
                     x is null ? null : sortKeys[x],
