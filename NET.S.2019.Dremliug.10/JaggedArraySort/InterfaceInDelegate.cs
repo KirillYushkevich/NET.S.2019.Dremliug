@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JaggedArray.DelegateOverInterface
+namespace JaggedArray.InterfaceInDelegate
 {
     /// <summary>
     /// Provides methods for sorting jagged matrix of integers.
@@ -81,27 +81,27 @@ namespace JaggedArray.DelegateOverInterface
             }
 
             // Sort the matrix.
-            launchSort(
+            // Does the task require to call method like this?
+            bubbleSort(
+                ((IComparer<int[]>)Comparer<int[]>.Create(
                 (x, y) =>
                 Nullable.Compare(
                     x is null ? null : sortKeys[x],
-                    y is null ? null : sortKeys[y]));
+                    y is null ? null : sortKeys[y]))).Compare);
 
-            void launchSort(Comparison<int[]> comparison) => bubbleSort(Comparer<int[]>.Create(comparison));
-
-            void bubbleSort(IComparer<int[]> comparer)
+            void bubbleSort(Comparison<int[]> comparison)
             {
                 // Select a comparison method depending on the sotring order.
                 Func<int[], int[], bool> swapRequired;
                 if (descending)
                 {
                     // a < b
-                    swapRequired = (a, b) => comparer.Compare(a, b) < 0;
+                    swapRequired = (a, b) => comparison(a, b) < 0;
                 }
                 else
                 {
                     // a > b
-                    swapRequired = (a, b) => comparer.Compare(a, b) > 0;
+                    swapRequired = (a, b) => comparison(a, b) > 0;
                 }
 
                 // Sort.
