@@ -82,12 +82,23 @@ namespace JaggedArray.DelegateOverInterface
 
             // Sort the matrix.
             launchSort(
+
+                // Create a Comparison<int[]>-compatible delegate.
                 (x, y) =>
                 Nullable.Compare(
                     x is null ? null : sortKeys[x],
                     y is null ? null : sortKeys[y]));
 
+            // Task requirements: the method that takes Comparison<int[]> delegate calls the method that takes IComparer<int[]> interface.
             void launchSort(Comparison<int[]> comparison) => bubbleSort(Comparer<int[]>.Create(comparison));
+
+            //// Shorter:
+            // bubbleSort(
+            //    Comparer<int[]>.Create(
+            //        (x, y) =>
+            //        Nullable.Compare(
+            //            x is null ? null : sortKeys[x],
+            //            y is null ? null : sortKeys[y])));
 
             void bubbleSort(IComparer<int[]> comparer)
             {
