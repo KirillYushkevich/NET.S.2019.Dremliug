@@ -87,14 +87,21 @@ namespace BookTask
 
         public virtual int CompareTo(Book other)
         {
+            // return
+            //    ReferenceEquals(this, other) ? 0 :
+            //    other is null ? 1 :
+            //    this.Isbn != other.Isbn ? Nullable.Compare(this.Isbn, other.Isbn) :
+            //    this.Author != other.Author ? string.Compare(this.Author, other.Author) :
+            //    this.Title != other.Title ? string.Compare(this.Title, other.Title) :
+            //    this.Publisher != other.Publisher ? string.Compare(this.Publisher, other.Publisher) :
+            //    Nullable.Compare(this.Year, other.Year);
+            //
+            // ValueTuple comparer performs item wise comparison in order until the first inequality.
             return
                 ReferenceEquals(this, other) ? 0 :
                 other is null ? 1 :
-                this.Isbn != other.Isbn ? Nullable.Compare(this.Isbn, other.Isbn) :
-                this.Author != other.Author ? string.Compare(this.Author, other.Author) :
-                this.Title != other.Title ? string.Compare(this.Title, other.Title) :
-                this.Publisher != other.Publisher ? string.Compare(this.Publisher, other.Publisher) :
-                Nullable.Compare(this.Year, other.Year);
+                    (this.Isbn, this.Author, this.Title, this.Publisher, this.Year).CompareTo(
+                    (other.Isbn, other.Author, other.Title, other.Publisher, other.Year));
         }
         #endregion
 
