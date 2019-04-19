@@ -12,3 +12,5 @@
 - [08 Day](https://github.com/deNoor/NET.S.2019.Dremliug/tree/master/NET.S.2019.Dremliug.08): Book storage; Bank account.
 
 - [10 Day](https://github.com/deNoor/NET.S.2019.Dremliug/tree/master/NET.S.2019.Dremliug.10): IFormattable, IFormatProvider, ICustomFormatter for Book; delegates in GCD code; IComparer, Comparison for Jagged array.
+
+- [11 Day](https://github.com/deNoor/NET.S.2019.Dremliug/tree/master/NET.S.2019.Dremliug.11): Logging for Book service; Countdown timer; Generic binary search; Fibonacci sequence generator.
