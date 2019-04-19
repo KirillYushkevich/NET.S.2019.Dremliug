@@ -1,4 +1,4 @@
-1. Book
+1. `Book.`
 
     - Create the **Book** class (ISBN, author, title, publisher, year of publication, number of pages, price), *override* all necessary methods of Object.
     - Implement *ordering and equality* for instances of Book class (use *interfaces*).
@@ -12,7 +12,7 @@
     - Use a binary file as storage. Only BinaryReader and BinaryWriter are allowed to work with the storage. The storage may change later.
     - **(!)** do not use delegates
     
-2. Bank account
+2. `Bank account.`
 
     - Develop a type system describing work with a bank account.
     - The state of the account is determined by its ID, account holder (name, surname), balance and some bonus points. Bonus points increase / decrease each time the account is credited / debited by values ​​different for adding and withdrawal and are calculated depending on some "value" of the balance and a "value" of adding. These "values" are integers and depend on accuont status which may be Base, Gold, Platinum.
