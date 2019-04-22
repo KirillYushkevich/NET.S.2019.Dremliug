@@ -15,7 +15,12 @@ namespace BinarySearchTreeGeneric
     /// <typeparam name="T"></typeparam>
     public class BinarySearchTreeG<T>
     {
+        #region Fields
         private readonly IComparer<T> _comparer;
+
+        // Used by iterator.
+        private List<Node<T>> list; 
+        #endregion
 
         #region Constructors
         public BinarySearchTreeG(IComparer<T> comparer = null)
@@ -45,12 +50,15 @@ namespace BinarySearchTreeGeneric
 
         #region Properties
         public Node<T> Root { get; private set; }
+
+        private int Count { get; set; } = 0;
         #endregion
 
         #region Contains & Insert methods
         public void Insert(T value)
         {
             var newNode = new Node<T>(value);
+            Count++;
 
             if (Root == null)
             {
@@ -119,76 +127,66 @@ namespace BinarySearchTreeGeneric
         #region Walk Orders
         public IEnumerable<Node<T>> WalkPreorder()
         {
-            return Preorder(Root);
+            return Iterate(Preorder);
 
-            IEnumerable<Node<T>> Preorder(Node<T> node)
+            void Preorder(Node<T> node)
             {
                 if (node is null)
                 {
-                    yield break;
+                    return;
                 }
 
-                yield return node;
-
-                foreach (Node<T> n in Preorder(node.Left))
-                {
-                    yield return n;
-                }
-
-                foreach (Node<T> n in Preorder(node.Right))
-                {
-                    yield return n;
-                }
+                list.Add(node);
+                Preorder(node.Left);
+                Preorder(node.Right);
             }
         }
 
         public IEnumerable<Node<T>> WalkInorder()
         {
-            return Inorder(Root);
+            return Iterate(Inorder);
 
-            IEnumerable<Node<T>> Inorder(Node<T> node)
+            void Inorder(Node<T> node)
             {
                 if (node is null)
                 {
-                    yield break;
+                    return;
                 }
 
-                foreach (Node<T> n in Inorder(node.Left))
-                {
-                    yield return n;
-                }
-
-                yield return node;
-
-                foreach (Node<T> n in Inorder(node.Right))
-                {
-                    yield return n;
-                }
+                Inorder(node.Left);
+                list.Add(node);
+                Inorder(node.Right);
             }
         }
 
         public IEnumerable<Node<T>> WalkPostorder()
         {
-            return Postorder(Root);
+            return Iterate(Postorder);
 
-            IEnumerable<Node<T>> Postorder(Node<T> node)
+            void Postorder(Node<T> node)
             {
                 if (node is null)
                 {
-                    yield break;
+                    return;
                 }
 
-                foreach (Node<T> n in Postorder(node.Left))
-                {
-                    yield return n;
-                }
+                Postorder(node.Left);
+                Postorder(node.Right);
+                list.Add(node);
+            }
+        }
+        #endregion
 
-                foreach (Node<T> n in Postorder(node.Right))
-                {
-                    yield return n;
-                }
+        #region Iterator
+        // Iterator block. 
+        private IEnumerable<Node<T>> Iterate(Action<Node<T>> walkOrder)
+        {
+            list = new List<Node<T>>(Count);
+            walkOrder(Root);
 
-                yield return node;
+            for (int i = 0; i < Count; i++)
+            {
+                yield return list[i];
             }
         } 
         #endregion
