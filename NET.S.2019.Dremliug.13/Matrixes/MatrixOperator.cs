@@ -46,7 +46,7 @@ namespace Matrixes
             int sizeOfB = b.Size;
             int sizeOfResult = Math.Max(sizeOfA, sizeOfB);
 
-            // Get constructor of generic type and create new matrix.
+            // Get constructor of generic type and create a new matrix.
             Tmatrix result =
                 (Tmatrix)
                 typeof(Tmatrix)

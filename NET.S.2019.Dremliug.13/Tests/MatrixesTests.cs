@@ -362,7 +362,7 @@ namespace Tests
             // Check the event.
             Assert.IsTrue(eventFired, "Event was registered.");
             Assert.IsNotNull(eventSender, "Event sender is registered.");
-            Assert.AreEqual(square, eventSender, "Event sender is the correct object.");
+            Assert.AreSame(square, eventSender, "Event sender is the correct object.");
             Assert.IsNotNull(eventArgs, "Event arguments are provided.");
             Assert.AreEqual(newValue, eventArgs.Value, "Event args contain correct new value.");
             Assert.AreEqual(i, eventArgs.Iindex, "Event args contain correct I index.");
