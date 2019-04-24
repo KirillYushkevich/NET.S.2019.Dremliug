@@ -63,10 +63,15 @@ namespace Matrixes
 
             set
             {
-                if (this.IndexesAreCorrect(i, j) && i == j)
+                if (this.IndexesAreCorrect(i, j))
                 {
-                    this._array[i, j] = value;
-                    this.OnElementChanged(new ElementChangedEventArgs<T>(i, j, value));
+                    // Only the main diag slots are open for set.
+                    // Silently do nothing on attempt to set element outside the main diag. 
+                    if (i == j)
+                    {
+                        this._array[i, j] = value;
+                        this.OnElementChanged(new ElementChangedEventArgs<T>(i, j, value));
+                    }
                 }
                 else
                 {
