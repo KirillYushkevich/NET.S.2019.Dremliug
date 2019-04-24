@@ -182,6 +182,8 @@ namespace BinarySearchTreeGeneric
         private IEnumerable<Node<T>> Iterate(Action<Node<T>> walkOrder)
         {
             list = new List<Node<T>>(Count);
+
+            // Fill the list with values in the specified order.
             walkOrder(Root);
 
             for (int i = 0; i < Count; i++)

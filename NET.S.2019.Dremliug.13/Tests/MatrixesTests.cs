@@ -319,8 +319,6 @@ namespace Tests
             Assert.Throws<ArgumentOutOfRangeException>(() => new SquareMatrix<int>(-1), "Square with negative size.");
             Assert.Throws<ArgumentOutOfRangeException>(() => new SymmMatrix<int>(-1), "Symm with negative size.");
             Assert.Throws<ArgumentOutOfRangeException>(() => new DiagMatrix<int>(-1), "Diag with negative size.");
-
-            Assert.Throws<ArgumentOutOfRangeException>(() => new DiagMatrix<int>(2)[1, 0] = 3, "Attempt to change element outside main Diag.");
         }
 
         [Test]
