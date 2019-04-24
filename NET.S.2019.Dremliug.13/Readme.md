@@ -12,8 +12,8 @@
 
 3. `Generic Binary Search Tree`.
     - Create a generic Binary Search Tree class.
-    - Provide an option to use custom sort order.
-    - Implement three ways for traversing the tree: Inorder, Preorder and Postorder. Use *yield* to define an iterator.
+    - Provide an interface for using custom sort order.
+    - Implement three ways for traversing the tree: Inorder, Preorder and Postorder. Use *yield* keyword to define an iterator.
     - Test with the following types:
       - System.Int32 (default and custom comparers),
       - System.String (default and custom comparers),
