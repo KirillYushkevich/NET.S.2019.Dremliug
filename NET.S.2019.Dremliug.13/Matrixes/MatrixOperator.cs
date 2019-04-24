@@ -60,8 +60,8 @@ namespace Matrixes
             {
                 for (int i = 0; i < sizeOfResult; i++)
                 {
-                    Telement itemA = (sizeOfResult <= sizeOfA) ? a[i, j] : default(Telement);
-                    Telement itemB = (sizeOfResult <= sizeOfB) ? b[i, j] : default(Telement);
+                    Telement itemA = (sizeOfResult <= sizeOfA) ? a[i, j] : default;
+                    Telement itemB = (sizeOfResult <= sizeOfB) ? b[i, j] : default;
                     result[i, j] = combineFunction(itemA, itemB);
                 }
             }

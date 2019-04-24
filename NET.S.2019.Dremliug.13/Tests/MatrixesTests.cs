@@ -40,7 +40,7 @@ namespace Tests
 
             var emptyDiag = new DiagMatrix<string>();
             EveryElementAssert(expectedEmpty, emptyDiag, "Empty string Diag creation");
-        } 
+        }
         #endregion
 
         #region Int + String creation of size
@@ -86,7 +86,7 @@ namespace Tests
 
             var sizedDiag = new DiagMatrix<string>(5);
             EveryElementAssert(expectedDefaultValues, sizedDiag, "Sized string Diag default values creation");
-        } 
+        }
         #endregion
 
         #region Int Creation from non-square
@@ -204,7 +204,7 @@ namespace Tests
 
             var actualDiag = new DiagMatrix<string>(nonSquareInput);
             EveryElementAssert(expectedDiag, actualDiag, "From string non-square to Diag creation");
-        } 
+        }
         #endregion
 
         #region Int Sum
@@ -258,7 +258,7 @@ namespace Tests
             var actualSymmSum = MatrixOperator<int>.Sum(actualSymmLeft, actualDiagRight);
             Assert.AreEqual(typeof(SymmMatrix<int>), actualSymmSum.GetType(), $"Return type is not generic, expected: {typeof(SymmMatrix<int>)} but was {actualSymmLeft.GetType()}");
             EveryElementAssert(expectedSymmArray, actualSymmSum, "SymmMatrix + DiagMatrix = SymmMatrix");
-        } 
+        }
         #endregion
 
         #region String Sum
@@ -280,7 +280,7 @@ namespace Tests
             { "a", null, null, "d" },
             { "a", "b", "c", "d" },
             };
-            
+
             string em = string.Empty; // Style cop hates "".
             string[,] expectedSquareArray =
             {
@@ -319,6 +319,8 @@ namespace Tests
             Assert.Throws<ArgumentOutOfRangeException>(() => new SquareMatrix<int>(-1), "Square with negative size.");
             Assert.Throws<ArgumentOutOfRangeException>(() => new SymmMatrix<int>(-1), "Symm with negative size.");
             Assert.Throws<ArgumentOutOfRangeException>(() => new DiagMatrix<int>(-1), "Diag with negative size.");
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => new DiagMatrix<int>(2)[1, 0] = 3, "Attempt to change element outside main Diag.");
         }
 
         [Test]
@@ -333,7 +335,7 @@ namespace Tests
 
         #region Event tests
         [Test]
-        public void EventTest()
+        public void SquareEventTest()
         {
             // This matrix will send event.
             var square = new SquareMatrix<int>(2);
@@ -343,30 +345,69 @@ namespace Tests
             int i = 0;
             int j = 1;
 
-            // Prepare indicators.
+            // This indicates if any event was fired.
             bool eventFired = false;
-            SquareMatrix<int> eventSender = null;
-            SquareMatrix<int>.ElementChangedEventArgs<int> eventArgs = null;
 
-            // Subscribe to event.
-            square.ElementChanged += (sender, e) =>
-                {
-                    eventFired = true;
-                    eventSender = sender as SquareMatrix<int>;
-                    eventArgs = e;
-                };
+            // Subscribe to the event.
+            square.ElementChanged += eventChecker;
 
             // Change the element to raise the event.
             square[i, j] = newValue;
 
-            // Check the event.
-            Assert.IsTrue(eventFired, "Event was registered.");
-            Assert.IsNotNull(eventSender, "Event sender is registered.");
-            Assert.AreSame(square, eventSender, "Event sender is the correct object.");
-            Assert.IsNotNull(eventArgs, "Event arguments are provided.");
-            Assert.AreEqual(newValue, eventArgs.Value, "Event args contain correct new value.");
-            Assert.AreEqual(i, eventArgs.Iindex, "Event args contain correct I index.");
-            Assert.AreEqual(j, eventArgs.Jindex, "Event args contain correct J index.");
+            // Warn if there was no event. 
+            Assert.IsTrue(eventFired, "No event is registered.");
+
+            // Event listener.
+            void eventChecker(object eventSender, SquareMatrix<int>.ElementChangedEventArgs<int> eventArgs)
+            {
+                // Check the event.
+                Assert.IsNotNull(eventSender, "Event sender is registered.");
+                Assert.AreSame(square, eventSender, "Event sender is the correct object.");
+                Assert.IsNotNull(eventArgs, "Event arguments are provided.");
+                Assert.AreEqual(newValue, eventArgs.Value, "Event args contain correct new value.");
+                Assert.AreEqual(i, eventArgs.Iindex, "Event args contain correct I index.");
+                Assert.AreEqual(j, eventArgs.Jindex, "Event args contain correct J index.");
+
+                eventFired = true;
+            }
+        }
+
+        [Test]
+        public void SymmEventTest()
+        {
+            // This matrix will send event.
+            var symm = new SymmMatrix<int>(2);
+
+            // This element will be changed.
+            int newValue = 5;
+            int i = 0;
+            int j = 1;
+
+            // This indicates if any event was fired.
+            int eventsFired = 0;
+
+            // Subscribe to the event.
+            symm.ElementChanged += eventChecker;
+
+            // Change the element to raise the event.
+            symm[i, j] = newValue;
+
+            // Warn if there was no event. 
+            Assert.AreEqual(2, eventsFired, $"{eventsFired} Event(s) registered.");
+
+            // Event listener.
+            void eventChecker(object eventSender, SymmMatrix<int>.ElementChangedEventArgs<int> eventArgs)
+            {
+                // Check the event.
+                Assert.IsNotNull(eventSender, "Event sender is registered.");
+                Assert.AreSame(symm, eventSender, "Event sender is the correct object.");
+                Assert.IsNotNull(eventArgs, "Event arguments are provided.");
+                Assert.AreEqual(newValue, eventArgs.Value, "Event args contain correct new value.");
+                Assert.That(eventArgs.Iindex == i || eventArgs.Iindex == j, "Event args contain correct I index.");
+                Assert.That(eventArgs.Iindex == i || eventArgs.Iindex == j, "Event args contain correct J index.");
+
+                eventsFired++;
+            }
         }
         #endregion
 
@@ -384,7 +425,7 @@ namespace Tests
                     Assert.AreEqual(expectedMatrix[i, j], actualMatrix[i, j], $"{testTypeMessage}, wrong value at [{i}, {j}] expected: {expectedMatrix[i, j] ?? "null"} but was {actualMatrix[i, j] ?? "null"}");
                 }
             }
-        } 
+        }
         #endregion
     }
 }

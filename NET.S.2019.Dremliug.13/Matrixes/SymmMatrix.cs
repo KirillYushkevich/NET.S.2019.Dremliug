@@ -40,6 +40,45 @@ namespace Matrixes
         }
         #endregion
 
+        #region Indexer
+        /// <summary>
+        /// Get or set the element at the given position.
+        /// </summary>
+        /// <param name="i">Row index.</param>
+        /// <param name="j">Column index.</param>
+        /// <returns></returns>
+        public override T this[int i, int j]
+        {
+            get
+            {
+                if (this.IndexesAreCorrect(i, j))
+                {
+                    return this._array[i, j];
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException($"Indexes are out of range i: {i}, j: {j}");
+                }
+            }
+
+            set
+            {
+                if (this.IndexesAreCorrect(i, j))
+                {
+                    this._array[i, j] = value;
+                    this.OnElementChanged(new ElementChangedEventArgs<T>(i, j, value));
+
+                    this._array[j, i] = value;
+                    this.OnElementChanged(new ElementChangedEventArgs<T>(j, i, value));
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException($"Indexes are out of range i: {i}, j: {j}");
+                }
+            }
+        }
+        #endregion
+
         #region Private methods
         /// <summary>
         /// Creates a symmetric matrix from a two-dimensional array. Use in constructor and explicit cast.
@@ -58,14 +97,14 @@ namespace Matrixes
 
                 for (int i = 0; i < size; i++)
                 {
-                    // Copy main diag values;
+                    // Copy the values of the main diag;
                     result[i, i] = array[i, i];
 
                     for (int j = i + 1; j < size; j++)
                     {
                         T value;
 
-                        // Get value from given part of array.
+                        // Get the value from the given part of the array.
                         if (fromTopPart)
                         {
                             value = array[i, j];
@@ -75,7 +114,7 @@ namespace Matrixes
                             value = array[j, i];
                         }
 
-                        // Put symmetric copy to both parts of result. 
+                        // Place a symmetrical copy in both parts of the result. 
                         result[i, j] = value;
                         result[j, i] = value;
                     }

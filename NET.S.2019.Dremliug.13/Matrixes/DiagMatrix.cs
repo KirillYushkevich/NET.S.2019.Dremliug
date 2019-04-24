@@ -40,6 +40,42 @@ namespace Matrixes
         }
         #endregion
 
+        #region Indexer
+        /// <summary>
+        /// Get or set the element at the given position.
+        /// </summary>
+        /// <param name="i">Row index.</param>
+        /// <param name="j">Column index.</param>
+        /// <returns></returns>
+        public override T this[int i, int j]
+        {
+            get
+            {
+                if (this.IndexesAreCorrect(i, j))
+                {
+                    return this._array[i, j];
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException($"Indexes are out of range i: {i}, j: {j}");
+                }
+            }
+
+            set
+            {
+                if (this.IndexesAreCorrect(i, j) && i == j)
+                {
+                    this._array[i, j] = value;
+                    this.OnElementChanged(new ElementChangedEventArgs<T>(i, j, value));
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException($"Indexes are out of range i: {i}, j: {j}");
+                }
+            }
+        }
+        #endregion
+
         #region Private methods
         /// <summary>
         /// Creates a diagonal matrix from a two-dimensional array. Use in constructor and explicit cast.
@@ -58,7 +94,7 @@ namespace Matrixes
 
                 for (int i = 0; i < size; i++)
                 {
-                    // Copy main diag values;
+                    // Copy the values of the main diag;
                     result[i, i] = array[i, i];
                 }
             }

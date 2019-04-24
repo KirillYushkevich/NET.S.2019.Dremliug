@@ -52,7 +52,7 @@ namespace Matrixes
         }
         #endregion
 
-        #region Event
+        #region Events
         /// <summary>
         /// Occurs when matrix element changed.
         /// </summary>
@@ -72,15 +72,15 @@ namespace Matrixes
         /// <param name="i">Row index.</param>
         /// <param name="j">Column index.</param>
         /// <returns></returns>
-        public T this[int i, int j]
+        public virtual T this[int i, int j]
         {
             get
             {
-                try
+                if (IndexesAreCorrect(i, j))
                 {
                     return this._array[i, j];
                 }
-                catch (ArgumentOutOfRangeException)
+                else
                 {
                     throw new ArgumentOutOfRangeException($"Indexes are out of range i: {i}, j: {j}");
                 }
@@ -88,16 +88,15 @@ namespace Matrixes
 
             set
             {
-                try
+                if (IndexesAreCorrect(i, j))
                 {
                     this._array[i, j] = value;
+                    this.OnElementChanged(new ElementChangedEventArgs<T>(i, j, value));
                 }
-                catch (ArgumentOutOfRangeException)
+                else
                 {
                     throw new ArgumentOutOfRangeException($"Indexes are out of range i: {i}, j: {j}");
                 }
-
-                OnElementChanged(new ElementChangedEventArgs<T>(i, j, value));
             }
         }
         #endregion
@@ -109,6 +108,27 @@ namespace Matrixes
         #region OnEvent
         protected virtual void OnElementChanged(ElementChangedEventArgs<T> args)
             => ElementChanged?.Invoke(this, args);
+        #endregion
+
+        #region Protected methods
+        /// <summary>
+        /// Checks indexes before using them in indexer.
+        /// </summary>
+        /// <param name="i"></param>
+        /// <param name="j"></param>
+        /// <returns></returns>
+        protected bool IndexesAreCorrect(int i, int j)
+        {
+            bool areCorrect = false;
+
+            if (i >= 0 && i < Size &&
+                j >= 0 && j < Size)
+            {
+                areCorrect = true;
+            }
+
+            return areCorrect;
+        }
         #endregion
 
         #region Private methods
@@ -137,7 +157,7 @@ namespace Matrixes
             }
 
             return result;
-        } 
+        }
         #endregion
 
         #region ElementChangedEventArgs
