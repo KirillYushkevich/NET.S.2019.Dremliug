@@ -68,8 +68,11 @@ namespace Matrixes
                     this._array[i, j] = value;
                     this.OnElementChanged(new ElementChangedEventArgs<T>(i, j, value));
 
-                    this._array[j, i] = value;
-                    this.OnElementChanged(new ElementChangedEventArgs<T>(j, i, value));
+                    if (i != j)
+                    {
+                        this._array[j, i] = value;
+                        this.OnElementChanged(new ElementChangedEventArgs<T>(j, i, value));
+                    }
                 }
                 else
                 {
