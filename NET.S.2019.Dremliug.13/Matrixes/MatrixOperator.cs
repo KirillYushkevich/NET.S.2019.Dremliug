@@ -9,6 +9,7 @@ namespace Matrixes
     /// <typeparam name="Telement"></typeparam>
     public static class MatrixOperator<Telement>
     {
+        #region public Sum()
         /// <summary>
         /// Sums two square matrixes using <paramref name="sumFunction"/> on their values.
         /// </summary>
@@ -24,8 +25,10 @@ namespace Matrixes
                 throw new MatrixOperationException($"Cannot find a method for summing values of type {typeof(Telement)}");
 
             return Combine(a, b, sumFunction);
-        }
+        } 
+        #endregion
 
+        #region public Combine()
         /// <summary>
         /// Combines two square matrixes using <paramref name="combineFunction"/> on their values.
         /// </summary>
@@ -44,9 +47,9 @@ namespace Matrixes
 
             int sizeOfA = a.Size;
             int sizeOfB = b.Size;
-            int sizeOfResult = Math.Max(sizeOfA, sizeOfB);
+            int sizeOfResult = Math.Min(sizeOfA, sizeOfB);
 
-            // Get constructor of generic type and create a new matrix.
+            // Get the constructor of this generic type and create a new matrix.
             Tmatrix result =
                 (Tmatrix)
                 typeof(Tmatrix)
@@ -60,17 +63,17 @@ namespace Matrixes
             {
                 for (int i = 0; i < sizeOfResult; i++)
                 {
-                    Telement itemA = (sizeOfResult <= sizeOfA) ? a[i, j] : default;
-                    Telement itemB = (sizeOfResult <= sizeOfB) ? b[i, j] : default;
-                    result[i, j] = combineFunction(itemA, itemB);
+                    result[i, j] = combineFunction(a[i, j], b[i, j]);
                 }
             }
-            
-            return result;
-        }
 
+            return result;
+        } 
+        #endregion
+
+        #region private FindSumFunction()
         /// <summary>
-        /// Tries to find sum method for instances of class.
+        /// Tries to find a sum method for instances of the class.
         /// </summary>
         /// <returns></returns>
         private static Func<Telement, Telement, Telement> FindSumFunction()
@@ -87,13 +90,13 @@ namespace Matrixes
             }
             catch (InvalidOperationException)
             {
-                // + operator is not applicable for this type.
+                // + operator is not applicable for this type. Failed to compile the lambda.
             }
 
-            // If lambda hasn't beed compiled try this way.
+            // If the lambda hasn't beed compiled then try this way.
             if (sumFunction is null)
             {
-                // Possible names of static method that provide any kind of a sum-like operation.
+                // Possible names of a static method that may provide any kind of a sum-like operation.
                 string[] sumMethodNames =
                 {
                     "op_Addition",
@@ -105,7 +108,7 @@ namespace Matrixes
 
                 foreach (string methodName in sumMethodNames)
                 {
-                    // Try do find a static method by name.
+                    // Try to find a static method by name.
                     sumFunction =
                         (Func<Telement, Telement, Telement>)
                         typeof(Telement)
@@ -121,6 +124,7 @@ namespace Matrixes
             }
 
             return sumFunction;
-        }
+        } 
+        #endregion
     }
 }
