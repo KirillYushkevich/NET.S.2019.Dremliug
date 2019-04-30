@@ -10,14 +10,24 @@ namespace QueueGeneric
     /// </summary>
     public class QueueG<T> : IEnumerable<T>
     {
-        // Use List<T>. Makes Dequeue() O(n) time but noone is going to use this class anyway.
-        private List<T> _items;
+        private LinkedList<T> _items;
 
-        public QueueG() => _items = new List<T>();
+        public QueueG() => _items = new LinkedList<T>();
 
-        public QueueG(IEnumerable<T> collection) => _items = collection?.ToList() ?? throw new ArgumentNullException($"collection is null");
+        public QueueG(IEnumerable<T> collection) : this()
+        {
+            if (collection is null)
+            {
+                throw new ArgumentNullException($"collection is null");
+            }
 
-        public void Enqueue(T item) => _items.Add(item);
+            foreach (T item in collection)
+            {
+                _items.AddLast(item);
+            }
+        }
+
+        public void Enqueue(T item) => _items.AddLast(item);
 
         public T Dequeue()
         {
@@ -26,15 +36,15 @@ namespace QueueGeneric
                 throw new InvalidOperationException("Queue is empty.");
             }
 
-            T item = _items[0];
-            _items.Remove(item);
+            T item = _items.First.Value;
+            _items.RemoveFirst();
 
             return item;
         }
 
         public void Clear() => _items.Clear();
 
-        public T Peek() => _items[0];
+        public T Peek() => _items.First.Value;
 
         public bool Contains(T item) => _items.Contains(item);
 
@@ -55,32 +65,38 @@ namespace QueueGeneric
         #region IEnumerator
         public class Enumerator : IEnumerator<T>
         {
-            private List<T> _items;
-            private int _index;
+            private LinkedList<T> _linkedList;
+            private LinkedListNode<T> _currentNode;
 
-            public Enumerator(List<T> list)
+            public Enumerator(LinkedList<T> linkedList)
             {
-                _items = list;
-                _index = -1;
+                _linkedList = linkedList;
+                _currentNode = null;
             }
 
-            public T Current => _items[_index];
+            public T Current
+            {
+                get
+                {
+                    return _currentNode is null ? throw new InvalidOperationException() : _currentNode.Value;
+                }
+            }
 
             object IEnumerator.Current => Current;
 
             public bool MoveNext()
             {
-                _index++;
-
-                if (_index >= _items.Count)
+                if (ReferenceEquals(_currentNode, _linkedList.Last))
                 {
                     return false;
                 }
 
+                _currentNode = _currentNode?.Next ?? _linkedList.First;
+
                 return true;
             }
 
-            public void Reset() => _index = -1;
+            public void Reset() => _currentNode = null;
 
             public void Dispose()
             {
