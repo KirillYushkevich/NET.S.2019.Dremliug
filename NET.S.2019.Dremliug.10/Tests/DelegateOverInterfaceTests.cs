@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using JaggedArray.DelegateOverInterface;
+﻿using JaggedArray.DelegateOverInterface;
 using NUnit.Framework;
 
 namespace Tests

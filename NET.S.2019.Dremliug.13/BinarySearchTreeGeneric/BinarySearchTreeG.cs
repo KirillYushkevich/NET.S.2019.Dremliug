@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 // Binary tree example: https://stackoverflow.com/a/13780680/11052981
 // About walk orders: https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/

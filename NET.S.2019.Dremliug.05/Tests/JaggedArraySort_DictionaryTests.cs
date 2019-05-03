@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace NET.S._2019.Dremliug._05.Tests
 {
@@ -11,7 +6,9 @@ namespace NET.S._2019.Dremliug._05.Tests
     class JaggedArraySort_DictionaryTests
     {
         private int[][] actual;
-        private void CreateActual()
+
+        [SetUp]
+        public void CreateActual()
         {
             actual = new[] {
                 new[] { 3, 2, 1, 5, 8 },
@@ -39,7 +36,6 @@ namespace NET.S._2019.Dremliug._05.Tests
                 new[] {int.MaxValue, int.MaxValue, 1},
             };
 
-            CreateActual();
             JaggedArraySort_Dictionary.SortRowsBySum(actual);
 
             Assert.AreEqual(expected, actual);
@@ -59,7 +55,6 @@ namespace NET.S._2019.Dremliug._05.Tests
                 null,
             };
 
-            CreateActual();
             JaggedArraySort_Dictionary.SortRowsBySum(actual, inDescendingOrder: true);
 
             Assert.AreEqual(expected, actual);
@@ -79,7 +74,6 @@ namespace NET.S._2019.Dremliug._05.Tests
                 new[] {int.MaxValue, int.MaxValue, 1},
             };
 
-            CreateActual();
             JaggedArraySort_Dictionary.SortRowsByMax(actual);
 
             Assert.AreEqual(expected, actual);
@@ -99,7 +93,6 @@ namespace NET.S._2019.Dremliug._05.Tests
                 null,
             };
 
-            CreateActual();
             JaggedArraySort_Dictionary.SortRowsByMax(actual, inDescendingOrder: true);
 
             Assert.AreEqual(expected, actual);
@@ -119,7 +112,6 @@ namespace NET.S._2019.Dremliug._05.Tests
                 new[] { 2, 4 },
             };
 
-            CreateActual();
             JaggedArraySort_Dictionary.SortRowsByMin(actual);
 
             Assert.AreEqual(expected, actual);
@@ -139,7 +131,6 @@ namespace NET.S._2019.Dremliug._05.Tests
                null,
             };
 
-            CreateActual();
             JaggedArraySort_Dictionary.SortRowsByMin(actual, inDescendingOrder: true);
 
             Assert.AreEqual(expected, actual);
