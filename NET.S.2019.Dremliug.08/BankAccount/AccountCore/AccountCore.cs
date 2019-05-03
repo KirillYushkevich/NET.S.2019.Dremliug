@@ -8,6 +8,12 @@ namespace BankAccount
 {
     internal class AccountCore : IEquatable<AccountCore>, IBankAccount
     {
+        #region fields
+        private AccountStatus _status;
+        private IAccountOwner _owner;
+        private AccountRank _rank; 
+        #endregion
+
         #region Constructors
         public AccountCore(ulong id, IAccountOwner owner, decimal balance, AccountRank rank)
         {
@@ -23,10 +29,10 @@ namespace BankAccount
         #region Properties
         public AccountStatus Status
         {
-            get => Status;
+            get => _status;
             set
             {
-                Status = Enum.IsDefined(typeof(AccountStatus), value) ? value : throw new AccountStatusException("Status is not defined");
+                _status = Enum.IsDefined(typeof(AccountStatus), value) ? value : throw new AccountStatusException("Status is not defined");
             }
         }
 
@@ -34,15 +40,15 @@ namespace BankAccount
 
         public IAccountOwner Owner
         {
-            get => Owner;
-            set => Owner = value ?? throw new AccountOwnerException("Owner must not be null");
+            get => _owner;
+            set => _owner = value ?? throw new AccountOwnerException("Owner must not be null");
         }
 
         public decimal Balance { get; set; }
 
         public int BonusPoints { get; set; }
 
-        public AccountRank Rank { get => Rank; set => Rank = Enum.IsDefined(typeof(AccountRank), value) ? value : throw new AccountRankException("Rank is not defined"); }
+        public AccountRank Rank { get => _rank; set => _rank = Enum.IsDefined(typeof(AccountRank), value) ? value : throw new AccountRankException("Rank is not defined"); }
         #endregion
 
         #region Equals and GetHashCode

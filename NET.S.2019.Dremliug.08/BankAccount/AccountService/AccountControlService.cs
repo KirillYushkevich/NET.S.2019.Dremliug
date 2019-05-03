@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BankAccount
 {
-    internal class AccountControlService
+    internal class AccountControlService : IAccountControlService
     {
-        private HashSet<IBankAccount> _setOfAccounts;
+        private HashSet<IBankAccount> _setOfAccounts = new HashSet<IBankAccount>();
         private ulong _nextAvailableID = 0;
         private IAccountStorage _accountStorage;
         private IBonusCalculator _bonusCalculator;
@@ -63,8 +63,6 @@ namespace BankAccount
 
         public void LoadBase()
         {
-            _setOfAccounts = new HashSet<IBankAccount>();
-
             foreach (IBankAccount account in _accountStorage.LoadAccountBase())
             {
                 _setOfAccounts.Add(account);
@@ -75,5 +73,7 @@ namespace BankAccount
         }
 
         public void SaveBase() => _accountStorage.SaveAccountBase(_setOfAccounts);
+
+        public IEnumerable<IBankAccount> ShowBase() => _setOfAccounts.AsEnumerable();
     }
 }

@@ -9,11 +9,11 @@ namespace BankAccount
 {
     internal class AccountStorageBinaryFile : IAccountStorage
     {
-        private readonly string _filePath = "SavedBooks.bin";
+        private readonly string _filePath = "SavedAccounts.bin";
 
         public AccountStorageBinaryFile(string filePath = null)
         {
-            _filePath = filePath ?? throw new AccountStorageException("Path must not be null");
+            _filePath = filePath ?? _filePath;
         }
 
         public void SaveAccountBase(IEnumerable<IBankAccount> accountBase)
@@ -35,7 +35,7 @@ namespace BankAccount
 
         IEnumerable<IBankAccount> IAccountStorage.LoadAccountBase()
         {
-            using (var reader = new BinaryReader(File.Open(_filePath, FileMode.Open)))
+            using (var reader = new BinaryReader(File.Open(_filePath, FileMode.OpenOrCreate)))
             {
                 while (reader.PeekChar() != -1)
                 {
