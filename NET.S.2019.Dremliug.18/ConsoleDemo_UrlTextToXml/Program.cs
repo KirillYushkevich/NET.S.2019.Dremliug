@@ -25,7 +25,6 @@ namespace ConsoleDemo_UrlTextToXml
             @"https://example02.com", // no path and no params without slash
             @"https://example03.com/path03a/path03b", // no params
             @"https://example04.com/path04a/path04b?key04a=value04a&key04b=value04b&key04c=value04c", // many params
-
         };
 
         private static void Main(string[] args)
