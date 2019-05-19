@@ -7,8 +7,16 @@ namespace NET.S._2019.Dremliug._05
     /// <summary>
     /// Provides methods for sorting jagged matrix of integers.
     /// </summary>
-    class JaggedArraySort_Dictionary
+    public class JaggedArraySort_Dictionary
     {
+        #region sorting modes
+        /// <summary> Supported sorting modes. </summary>
+        private enum Mode
+        {
+            Sum, Max, Min
+        }
+        #endregion
+
         #region public methods
         /// <summary> Sorts the rows of the jagged array by the sum of each row. </summary>
         /// <param name="jaggedMatrix"> Matrix to sort. </param>
@@ -26,14 +34,6 @@ namespace NET.S._2019.Dremliug._05
         public static void SortRowsByMin(int[][] jaggedMatrix, bool inDescendingOrder = false) => Sort(jaggedMatrix, Mode.Min, inDescendingOrder);
         #endregion
 
-        #region sorting modes
-        /// <summary> Supported sorting modes. </summary>
-        private enum Mode
-        {
-            Sum, Max, Min
-        }
-        #endregion
-
         #region private Sort()
         /// <summary> Sorts jagged matrix. </summary>
         /// <param name="jaggedMatrix"> Matrix to sort. </param>
@@ -41,7 +41,6 @@ namespace NET.S._2019.Dremliug._05
         /// <param name="descending"> Sort descending. </param>
         private static void Sort(int[][] jaggedMatrix, Mode mode, bool descending = false)
         {
-
             // Select a method for calculating the sort key.
             Func<IEnumerable<int>, Func<int, long>, long> calculateKey;
             switch (mode)
@@ -100,6 +99,7 @@ namespace NET.S._2019.Dremliug._05
 
                 // Sort.
                 for (int i = 0; i < jaggedMatrix.Length - 1; i++)
+                {
                     for (int j = 0; j < jaggedMatrix.Length - i - 1; j++)
                     {
                         if (compare(
@@ -110,6 +110,7 @@ namespace NET.S._2019.Dremliug._05
                             (jaggedMatrix[j], jaggedMatrix[j + 1]) = (jaggedMatrix[j + 1], jaggedMatrix[j]);
                         }
                     }
+                }
             }
             #endregion
         }

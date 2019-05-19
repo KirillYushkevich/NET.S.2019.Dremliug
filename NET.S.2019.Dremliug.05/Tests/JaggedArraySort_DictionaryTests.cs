@@ -3,20 +3,21 @@
 namespace NET.S._2019.Dremliug._05.Tests
 {
     [TestFixture]
-    class JaggedArraySort_DictionaryTests
+    public class JaggedArraySort_DictionaryTests
     {
         private int[][] actual;
 
         [SetUp]
         public void CreateActual()
         {
-            actual = new[] {
+            actual = new[]
+            {
                 new[] { 3, 2, 1, 5, 8 },
                 null,
                 new int[] { },
                 new[] { 3, 2, 6, 1 },
                 new[] { 2, 4 },
-                new[] {int.MaxValue, int.MaxValue, 1},
+                new[] { int.MaxValue, int.MaxValue, 1 },
                 new[] { 2, 5, -3 },
                 null,
             };
@@ -25,7 +26,8 @@ namespace NET.S._2019.Dremliug._05.Tests
         [Test]
         public void SortRowsBySumAscending()
         {
-            int[][] expected = new[] {
+            int[][] expected = new[]
+            {
                 null,
                 new int[] { },
                 null,
@@ -33,7 +35,7 @@ namespace NET.S._2019.Dremliug._05.Tests
                 new[] { 2, 4 },
                 new[] { 3, 2, 6, 1 },
                 new[] { 3, 2, 1, 5, 8 },
-                new[] {int.MaxValue, int.MaxValue, 1},
+                new[] { int.MaxValue, int.MaxValue, 1 },
             };
 
             JaggedArraySort_Dictionary.SortRowsBySum(actual);
@@ -44,8 +46,9 @@ namespace NET.S._2019.Dremliug._05.Tests
         [Test]
         public void SortRowsBySumDescending()
         {
-            int[][] expected = new[] {
-                new[] {int.MaxValue, int.MaxValue, 1},
+            int[][] expected = new[]
+            {
+                new[] { int.MaxValue, int.MaxValue, 1 },
                 new[] { 3, 2, 1, 5, 8 },
                 new[] { 3, 2, 6, 1 },
                 new[] { 2, 4 },
@@ -63,7 +66,8 @@ namespace NET.S._2019.Dremliug._05.Tests
         [Test]
         public void SortRowsByMaxAscending()
         {
-            int[][] expected = new[] {
+            int[][] expected = new[]
+            {
                 null,
                 new int[] { },
                 null,
@@ -71,7 +75,7 @@ namespace NET.S._2019.Dremliug._05.Tests
                 new[] { 2, 5, -3 },
                 new[] { 3, 2, 6, 1 },
                 new[] { 3, 2, 1, 5, 8 },
-                new[] {int.MaxValue, int.MaxValue, 1},
+                new[] { int.MaxValue, int.MaxValue, 1 },
             };
 
             JaggedArraySort_Dictionary.SortRowsByMax(actual);
@@ -82,8 +86,9 @@ namespace NET.S._2019.Dremliug._05.Tests
         [Test]
         public void SortRowsByMaxDescending()
         {
-            int[][] expected = new[] {
-                new[] {int.MaxValue, int.MaxValue, 1},
+            int[][] expected = new[]
+            {
+                new[] { int.MaxValue, int.MaxValue, 1 },
                 new[] { 3, 2, 1, 5, 8 },
                 new[] { 3, 2, 6, 1 },
                 new[] { 2, 5, -3 },
@@ -101,14 +106,15 @@ namespace NET.S._2019.Dremliug._05.Tests
         [Test]
         public void SortRowsByMinAscending()
         {
-            int[][] expected = new[] {
+            int[][] expected = new[]
+            {
                 null,
                 new int[] { },
                 null,
                 new[] { 2, 5, -3 },
                 new[] { 3, 2, 1, 5, 8 },
                 new[] { 3, 2, 6, 1 },
-                new[] {int.MaxValue, int.MaxValue, 1},
+                new[] { int.MaxValue, int.MaxValue, 1 },
                 new[] { 2, 4 },
             };
 
@@ -120,11 +126,12 @@ namespace NET.S._2019.Dremliug._05.Tests
         [Test]
         public void SortRowsByMinDescending()
         {
-            int[][] expected = new[] {
+            int[][] expected = new[]
+            {
                new[] { 2, 4 },
                new[] { 3, 2, 1, 5, 8 },
                new[] { 3, 2, 6, 1 },
-               new[] {int.MaxValue, int.MaxValue, 1},
+               new[] { int.MaxValue, int.MaxValue, 1 },
                new[] { 2, 5, -3 },
                null,
                new int[] { },

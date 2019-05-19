@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace NET.S._2019.Dremliug._05.Tests
 {
     [TestFixture]
-    class PolynomialTests
+    public class PolynomialTests
     {
         #region Ctor Tests
         [Test]
@@ -30,29 +30,30 @@ namespace NET.S._2019.Dremliug._05.Tests
         #endregion
 
         #region Indexer Tests
-        // Set indexer is private currently.
+        // Set indexer is not available currently.
+        /*
+       [TestCase(3)]
+       [TestCase(-1)]
+        public void IndexerSetThrows_IndexOutOfRangeExc(int index)
+        {
+            Polynomial p = new Polynomial(14.0, 16.3, -4.8);
 
-        //[TestCase(3)]
-        //[TestCase(-1)]
-        //public void IndexerSetThrows_IndexOutOfRangeExc(int index)
-        //{
-        //    Polynomial p = new Polynomial(14.0, 16.3, -4.8);
+            Assert.Throws<IndexOutOfRangeException>(() => p[index] = 19.7);
+        }
 
-        //    Assert.Throws<IndexOutOfRangeException>(() => p[index] = 19.7);
-        //}
+        [Test]
+        public void IndexerSetSuccess()
+        {
+            Polynomial actual = new Polynomial(14.0, 16.3, -4.8);
+            Polynomial expected = new Polynomial(2, 3, -4);
 
-        //[Test]
-        //public void IndexerSetSuccess()
-        //{
-        //    Polynomial actual = new Polynomial(14.0, 16.3, -4.8);
-        //    Polynomial expected = new Polynomial(2, 3, -4);
+            actual[0] = 2;
+            actual[1] = 3;
+            actual[2] = -4;
 
-        //    actual[0] = 2;
-        //    actual[1] = 3;
-        //    actual[2] = -4;
-
-        //    Assert.IsTrue(actual.ToArray().SequenceEqual(expected.ToArray()));
-        //}
+            Assert.IsTrue(actual.ToArray().SequenceEqual(expected.ToArray()));
+        }
+        */
 
         [TestCase(3)]
         [TestCase(-1)]
